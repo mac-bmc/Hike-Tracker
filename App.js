@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import SignUpScreen from './src/screens/AuthScreen/SignUpScreen';
+import SignInScreen from './src/screens/AuthScreen/SignInScreen';
+import AccountScreen from './src/screens/AppScreens/AccountScreen';
+import TrackCreateScreen from './src/screens/AppScreens/TrackCreateScreen';
+import TrackListScreen from './src/screens/AppScreens/TrackListScreen';
+import TackViewScreen from './src/screens/AppScreens/TackViewScreen';
+import React from 'react'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const switchNavigator = createSwitchNavigator({
+  loginFlow: createStackNavigator({
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    SignUp: SignUpScreen,
+    SignIn: SignInScreen,
+
+  }),
+  appFlow: createMaterialBottomTabNavigator({
+    AccountScreen: AccountScreen,
+    TrackCreateScreen: TrackCreateScreen,
+    viewTrack: createStackNavigator({
+      TrackListScreen: TrackListScreen,
+      TackViewScreen: TackViewScreen
+    })
+  })
 });
+
+export default createAppContainer(switchNavigator);
