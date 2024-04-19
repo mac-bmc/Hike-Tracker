@@ -25,6 +25,16 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Hike to use your location.",
+          "isAndroidForegroundServiceEnabled":true,
+          "isAndroidBackgroundLocationEnabled":true
+        }
+      ]
+    ]
   }
 }
